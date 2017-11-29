@@ -37,3 +37,16 @@ wget http://phosphat.uni-hohenheim.de/phosphat_20160120.csv
 wget http://phosphat.uni-hohenheim.de/HiConfPred_psites.txt
 cd -
 
+# download GOA
+mkdir GOA
+cd GOA
+wget ftp://ftp.ebi.ac.uk/pub/databases/GO/goa/ARABIDOPSIS/README
+wget ftp://ftp.ebi.ac.uk/pub/databases/GO/goa/ARABIDOPSIS/goa_arabidopsis.gaf.gz
+wget ftp://ftp.ebi.ac.uk/pub/databases/GO/goa/ARABIDOPSIS/goa_arabidopsis_isoform.gaf.gz
+
+zcat goa_arabidopsis.gaf.gz > tmp
+zcat goa_arabidopsis_isoform.gaf.gz >> tmp
+grep -v '^!' tmp|cut -f2,3,5,9,10,11|sort|uniq > goa_table.tsv
+rm tmp
+cd -
+
